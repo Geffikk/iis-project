@@ -1,0 +1,30 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav th:fragment="navbar" class="nav-wrapper amber darken-4">
+        <a th:href=" @{~/}" class="brand-logo" style="margin-left: 10px;"> Forum</a>
+        <div sec:authorize="${!isAnonymous()}">
+            <a class="bold" th:text="${#authentication.getName()}" style="float: right; margin-right: 20px; padding-left: 13px"></a>
+        </div>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+             <li sec:authorize="!hasAnyRole('USER, MODERATOR, ADMIN')"><a href="#modal-user-create" class="modal-trigger">Sign up</a></li>
+            <!--<li sec:authorize="!hasAnyRole('USER, MODERATOR, ADMIN')"><a th:href="@{/register}" class="modal-trigger">Sign up</a></li>-->
+            <li sec:authorize="!hasAnyRole('USER, MODERATOR, ADMIN')"><a th:href="@{/login}" class="modal-trigger">Sign in</a></li>
+
+            <li><a th:href="@{/users}">Users</a></li>
+            <li sec:authorize="hasAnyRole('USER, MODERATOR, ADMIN')"><a th:href="@{/myprofile}">My Profile</a></li>
+            <li sec:authorize="hasAnyRole('USER, MODERATOR, ADMIN')"><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+
+        <div th:replace="fragments/user_form :: modal_user_login_form"></div>
+        <div th:replace="fragments/create_user_modal_form :: create_user_modal_form"></div>
+    </nav>
+</body>
+</html>

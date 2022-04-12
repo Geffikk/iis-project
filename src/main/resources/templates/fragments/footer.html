@@ -1,0 +1,26 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+</head>
+
+<body>
+    <footer th:fragment="footer" class="page-footer amber darken-4">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Project Forum</h5>
+                    <p class="grey-text text-lighten-4">It's Spring MVC application.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-copyright">
+            <div class="container">&copy; 2020-2021 Maroš Geffert Patrik Tomov Tomáš Lisický</div>
+        </div>
+
+        <script type="text/javascript" th:src="@{/resources/js/signin-signup-modal.js}"></script>
+    </footer>
+</body>
+</html>

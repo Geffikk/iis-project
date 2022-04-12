@@ -1,0 +1,45 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/head :: head">
+</head>
+<body>
+    <nav th:replace="fragments/navbar :: navbar"></nav>
+    <div class="container">
+        <form th:action="@{/users}">
+            <input type="text" class="form-control" name="name" placeholder="Search User" />
+            <input type="submit" value="Search" />
+        </form>
+        <div class="row">
+            <div class="col s12">
+                <table>
+                    <tr>
+                        <th>NAME</th>
+                        <th>EMAIL</th>
+                    </tr>
+                    <tr th:each="user : ${users}">
+                        <div th:if="${!user.getRoleList().contains('ADMIN')}">
+                            <td th:text="${user.username}">Onions</td>
+                            <td th:text="${user.email}">123</td>
+                            <td>
+
+                                    <form th:action="@{/user/} + ${user.username}">
+                                        <button type="submit"
+                                                name="action"
+                                                class="btn waves-effect waves-light"
+                                                th:text="#{user.view}"
+                                                th:disabled="${user.isPublic == 0 && !#authorization.expression('hasRole(''ADMIN'')') && user.getUsername() != #authentication.name}">
+                                        </button>
+                                    </form>
+                            </td>
+                        </div>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

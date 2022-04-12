@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:insert="fragments/head :: head">
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+<body>
+<nav th:insert="fragments/navbar :: navbar"></nav>
+    <div class="stretch">
+        <div class="row">
+            <div class="col s12">
+                <table>
+                    <tr>
+                        <th>NAME</th>
+                        <th>EMAIL</th>
+                    </tr>
+                    <tr th:each="user : ${users}">
+                        <div th:if="${section.getRegisterApplicationAsList().contains(user.username) || #authorization.expression('hasRole(''ADMIN'')')}">
+                            <td th:text="${user.username}">Onions</td>
+                            <td th:text="${user.email}">123</td>
+                            <td>
+                                <form th:action="@{/section/} + ${section.id} + '/accept/' + ${user.id}">
+                                    <button type="submit"
+                                            name="action"
+                                            class="btn waves-effect waves-light"
+                                            th:text="#{user.accept}">
+                                    </button>
+                                </form>
+                            </td>
+                        </div>
+                    </tr>
+                </table>
+                <a th:href="@{/section/}+${section.id}" th:text="BACK" class="btn material-icons black-text yellow darken-1 right"></a>
+            </div>
+        </div>
+    </div>
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

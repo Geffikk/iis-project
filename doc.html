@@ -1,0 +1,116 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>Projekt IIS</title>
+    <style type="text/css">
+    	table { border-collapse: collapse; }
+    	td, th { border: 1px solid black; padding: 0.3em 0.5em; text-align: left; }
+    	dt { font-weight: bold; margin-top: 0.5em; }
+    </style>
+</head>
+<body>
+
+<!-- Zkontrolujte prosím nastavení kódování v hlavičce dokumentu 
+     podle použitého editoru -->
+
+<h1>Socialna sieť: diskusie v diskusných skupinách</h1> <!-- Nahradte názvem svého zadání -->
+
+<dl>
+	<dt>Autori</dt>
+	<dd>Maroš Geffert <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+	    <a href="mailto:xgeffe00@stud.fit.vutbr.cz">xgeffe00@stud.fit.vutbr.cz</a> -
+		security, controllers, views
+	</dd>
+	<dd>Patrik Tomov <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+	    <a href="mailto:xtomov02@stud.fit.vutbr.cz">xtomov02@stud.fit.vutbr.cz</a> - 
+		tvorba databázy, services, hosting
+	</dd>
+  <dd>Tomáš Lisický <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+	    <a href="mailto:xlisic01@stud.fit.vutbr.cz">xlisic01@stud.fit.vutbr.cz</a> - 
+		controllers, views,
+	</dd>
+	<dt>URL aplikace</dt>
+	<dd><a href="www.open-forum.xzy">www.open-forum.xzy</a></dd>
+	<dd><a href="www.open-forum.xzy">open-forum.xzy</a></dd>
+	
+</dl>
+
+<h2>Uživatelia systému pre testovanie</h2>
+<p>Uveďte prosím existující zástupce <strong>všech rolí uživatelů</strong>.</p>
+<table>
+<tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
+<tr><td>admin</td><td>admin</td><td>Administrátor</td></tr>
+<tr><td>Maros11</td><td>1234</td><td>USER(Zakladateľ skupiny IMA)</td></tr>
+<tr><td>Patres22</td><td>1234</td><td>USER(Moderátor skupiny IMA)</td></tr>
+<tr><td>Adam44</td><td>1234</td><td>USER(Člen skupiny IMA)</td></tr>
+</table>
+
+<p>(Diagram případů užití není nutné vkládat, pokud IS implementuje role a případy užití definované zadáním.)</p> 
+
+<h2>Implementace</h2>
+<p>Stručná dokumentace k implementaci, která popisuje, které části projektu (např. PHP skripty) implementují jednotlivé případy použití.</p>
+
+Všetky prípady použitia sú implementované v časti projektu CONTROLLER.
+
+<li>MyProfileController a UserController - slúžia na editovanie, mazanie, nastavovanie súkromia učtu</li>
+<li>TopicController - pridávať, mazať a editovať vlákna</li>
+<li>SectionController - umožňuje mazať, pridávať skupiny a príspevky, pridávať/mazať uživateľov/moderátorov, registrovať sa do skupín, požiadať o moderátora</li>
+<li>UserCreationRestController - umožňuje vytvárať uživateľov </li>
+
+
+<h3>Databáza</h3>
+
+<img src="forum_er.jpg" alt="er" width="500" height="800">
+
+<h2>Inštalácia</h2>
+
+Stručně popište: 
+<ul>
+<li>
+Pre náš projekt sme využili cloudovú službu digitalocean.com, ktorá nám poskytla stroj(Ubuntu 20.04) aj hosting databáze MySQL.
+Prvým krokom bolo vytvorenie tzv. dropletu na digitalocean.com, na ktorý sme sa pripojili pomocou hesla, ktoré sme zadávali pri vytváraní dropletu. Následne bolo treba na stroj nainštalovať nástroje potrebné pre beh aplikácie, ktoré sú uvedené nižšie.
+</li>
+
+<ul>
+	<li>tomcat9 - hosťovací server</li>
+	<li>java11 a maven – pre beh aplikácie</li>
+</ul>
+
+
+<li>V našej aplikácií sme využili JAVU 11 a nasledujúce knižnice(ako dependencies):
+	<ul>
+		<li>spring-boot-starter-thymeleaf</li>
+		<li>thymeleaf-extras-springsecurity5</li>
+		<li>spring-boot-starter-web</li>
+		<li>spring-boot-starter-tomcat</li>
+		<li>spring-session-core</li>
+		<li>spring-boot-configuration-processor</li>
+		<li>tomcat-embed-jasper</li>
+		<li>spring-boot-devtools</li>
+		<li>spring-boot-starter-test</li>
+		<li>spring-boot-starter-security 2.4.0</li>
+		<li>spring-boot-starter-mail</li>
+		<li>hibernate-core 5.4.23.Final</li>
+		<li>mysql-connector-java 8.0.22</li>
+		<li>spring-boot-starter-data-jpa 2.4.0</li>
+		<li>jakarta.validation-api 2.0.2</li>
+		<li>spring-context-support 5.0.8.RELEASE</li>
+		<li>javax.mail-api 1.6.2</li>
+		<li>servlet-api 3.0-alpha-1</li>
+		
+
+	</ul>
+</li>
+<li>
+Pre tvorbu databázy sme použili IDE MySQL Workbench, kde sme sa pripojili na host iis-forum-db-do-user-8375878-0.b.db.ondigitalocean.com pod uživateľským menom doadmin a heslom lj8tpe23c7yv5h05, následne sme spustili skript pre inicializáciu databázy.
+</li>
+
+
+<h2>Známé problémy</h2>
+<p>Z časových dôvodov sme neimplementovali ranking daných príspevkov.</p>
+
+</body>
+</html>
